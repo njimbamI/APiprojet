@@ -3,7 +3,6 @@ pipeline {
 
     environment {
         DATABASE_URL = 'mysql://root:@127.0.0.1:3306/app?serverVersion=10.11.2-MariaDB&charset=utf8mb4'
-         LOCAL_DEPLOY_PATH = 'E:\\Nouveau dossier'
     }
 
     stages {
@@ -37,26 +36,18 @@ pipeline {
             }
         }
 
-        stage('Build and Deploy') {
+        stage('Build Docker Image') {
             steps {
-        // Étape de build (exemples) :
-        sh 'npm install' // Si vous utilisez Node.js
-        sh 'npm run build' // Si vous avez des fichiers JS à compiler
+                // Build de l'image Docker de votre application Symfony
+                sh 'docker build -t mon_app_symfony .'
+            }
+        }
 
-        // Copiez les fichiers de l'application dans le répertoire de déploiement local
-        sh "cp -R * \"$LOCAL_DEPLOY_PATH\""
-    }
+        stage('Deploy with Docker') {
+            steps {
+                // Déployez l'image Docker sur un conteneur
+                sh 'docker run -d --name mon_app_container -p 80:80 mon_app_symfony'
+            }
         }
     }
-
-    post {
-    success {
-        echo 'Le pipeline a réussi. Félicitations!'
-        // Vous pouvez ajouter d'autres étapes post-déploiement ici en cas de succès
-    }
-    failure {
-        echo 'Le pipeline a échoué. Vérifiez les logs pour plus d'informations.'
-        // Vous pouvez ajouter d'autres étapes de gestion des échecs ici si nécessaire
-    }
-}
 }
