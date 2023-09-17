@@ -50,11 +50,13 @@ pipeline {
     }
 
     post {
-        success {
-            // Vous pouvez ajouter des étapes post-déploiement ici en cas de succès
-        }
-        failure {
-            // Vous pouvez ajouter des étapes de gestion des échecs ici si nécessaire
-        }
+    success {
+        echo 'Le pipeline a réussi. Félicitations!'
+        // Vous pouvez ajouter d'autres étapes post-déploiement ici en cas de succès
     }
+    failure {
+        echo 'Le pipeline a échoué. Vérifiez les logs pour plus d'informations.'
+        // Vous pouvez ajouter d'autres étapes de gestion des échecs ici si nécessaire
+    }
+}
 }
