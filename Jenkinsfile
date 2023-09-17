@@ -3,6 +3,7 @@ pipeline {
 
     environment {
         DATABASE_URL = 'mysql://root:@127.0.0.1:3306/app?serverVersion=10.11.2-MariaDB&charset=utf8mb4'
+         LOCAL_DEPLOY_PATH = 'E:\\Nouveau dossier'
     }
 
     stages {
@@ -38,9 +39,13 @@ pipeline {
 
         stage('Build and Deploy') {
             steps {
-                // Préparation de l'application Symfony pour la production
-                sh 'php bin/console cache:clear --env=prod'
-            }
+        // Étape de build (exemples) :
+        sh 'npm install' // Si vous utilisez Node.js
+        sh 'npm run build' // Si vous avez des fichiers JS à compiler
+
+        // Copiez les fichiers de l'application dans le répertoire de déploiement local
+        sh "cp -R * \"$LOCAL_DEPLOY_PATH\""
+    }
         }
     }
 
