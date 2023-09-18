@@ -20,7 +20,7 @@ pipeline {
 
         stage('Install Dependencies') {
             steps {
-                sh 'composer install'
+                sh 'composer install --ignore-platform-req=ext-xml'
             }
         }
 
