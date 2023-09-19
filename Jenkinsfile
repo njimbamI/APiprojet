@@ -2,7 +2,7 @@ pipeline {
     agent any
 
     environment {
-        DATABASE_URL = 'mysql://newuser:@127.0.0.1:3306/App?serverVersion=10.11.2-MariaDB&charset=utf8mb4'
+        DATABASE_URL = 'mysql://bolo:bolo@127.0.0.1:3306/App?serverVersion=10.11.2-MariaDB&charset=utf8mb4'
     }
 
     stages {
