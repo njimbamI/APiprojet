@@ -25,7 +25,9 @@ pipeline {
         }
         stage('Database Migration') {
             steps {
+                sh 'php bin/console doctrine:migrations:reset'
                 sh 'php bin/console doctrine:migrations:migrate --no-interaction'
+
             }
         }
 
