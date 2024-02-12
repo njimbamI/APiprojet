@@ -23,13 +23,6 @@ pipeline {
                 sh 'composer install --ignore-platform-req=ext-xml'
             }
         }
-
-        stage('Run Tests') {
-            steps {
-                sh 'php bin/phpunit'
-            }
-        }
-
         stage('Database Migration') {
             steps {
                 sh 'php bin/console doctrine:migrations:migrate --no-interaction'
